@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--Jorge Vargas 2013
+	Twitter: @jorgevargasvega
+	Website: virtualtec.cl
+-->
+	<html lang="es">
+<head>
+<link rel="stylesheet" href="css/estilo.css">
+<meta charset="utf-8">
+	<title>Fecha Probable de Parto</title>
+</head>
+<body>
+<div id="contenedor">
+	<header>CALCULA TU FECHA</br>PROBABLE DE PARTO</header>
+	<section>
+		<article class="cabecera">
+			<p><strong>Importante:</strong> Para ciclos regulares de 28 días</p>
+			<p>recomendamos consultar su parto con su médico.</p>
+		</article>
+		<form>
+			<span>Fecha de tu último período menstrual</span></br>
+			<div class="texto-fecha">
+				<div style="display:inline-block;">
+					<p>Día</p><p>Mes</p><p>Año</p>
+				</div>
+			</div>
+            <script>
+              now=new Date()
+              document.write("<select name='diaent' size='1' onchange='cambioFecha()'>")
+              for (dd=1;dd<=31;dd++)
+                {
+                if (dd == now.getDate()) document.write("<option selected value='"+dd+"'>"+dd+"</option>")
+                else document.write("<option value='"+dd+"'>"+dd+"</option>")
+                }
+              document.write("</select>")
+
+              document.write("<select name='mesent' size='1' onchange='cambioFecha()'>")
+              for (mm=0;mm<=11;mm++)
+                {
+                if (mm == now.getMonth()) document.write("<option selected value='"+mm+"'>"+(mm+1)+"</option>")
+                else document.write("<option value='"+mm+"'>"+(mm+1)+"</option>")
+                }
+              document.write("</select>")
+
+              document.write("<select name='anoent' size='1' onchange='cambioFecha()'>")
+              for (aa=2013;aa<=now.getFullYear()+3;aa++)
+                {
+                document.write("<option value='"+aa+"'>"+aa+"</option>")
+                }
+              document.write("</select>")
+            </script>
+            <p style="margin:15px;">
+            	<input type="button" name="button" id="button" value=" Calcular " onClick="calcular();"/>
+            </p>
+            <div class="texto-fecha">
+            <span>Fecha probable de parto: </span>
+				<div style="display:inline-block;">
+					<p>Día</p><p>Mes</p><p>Año</p>
+				</div>
+			</div>
+				<input type="text" name="diasal" size="1" readonly="readonly" />
+                <input type="text" name="messal" size="1" readonly="readonly" />
+                <input type="text" name="anosal" size="2" readonly="readonly" /></br>
+                <input type="reset" name="Limpiar" value="Limpiar">
+		</form>
+	</section>
+</div>
+<!--Calcula parto-->
+<script>
+function calcular()
+{
+  entrada = new Date(document.forms[0].anoent.value,document.forms[0].mesent.value,document.forms[0].diaent.value)
+  salida = new Date()
+  salida.setTime(entrada.getTime() + (280 * 86400000))
+  mes = salida.getMonth() +1
+  if (mes<10) mes="0"+mes;
+  document.forms[0].diasal.value=salida.getDate();
+  document.forms[0].messal.value=mes;
+  document.forms[0].anosal.value=salida.getFullYear();
+}
+</script>
+</body>
+</html>
